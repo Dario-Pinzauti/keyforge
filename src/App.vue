@@ -1,5 +1,6 @@
 <script setup>
 import { reactive, ref } from 'vue';
+import PlayerCard from './components/PlayerCard.vue';
 
 const emberNumber = ref(0);
 const keyNumber = ref(0);
@@ -38,8 +39,8 @@ const forge = () => {
 </script>
 
 <template>
-  <div class="app">
-    <div>
+  <div class="h-screen w-screen box-content m-0 p-4 flex gap-2">
+    <!-- <div>
       <img :src="key[keyNumber]" class="logo" alt="Vite logo" />
       <div style="text-align: center">
         <button @click="keyIncrement">+</button>
@@ -54,7 +55,9 @@ const forge = () => {
         <button @click="decrement">-</button>
         <button @click="forge">forgia</button>
       </div>
-    </div>
+    </div> -->
+    <PlayerCard></PlayerCard>
+    <PlayerCard></PlayerCard>
   </div>
 </template>
 

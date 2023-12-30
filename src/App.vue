@@ -1,64 +1,33 @@
-<script setup>
-import { reactive, ref } from 'vue';
-import PlayerCard from './components/PlayerCard.vue';
-
-const emberNumber = ref(0);
-const keyNumber = ref(0);
-const key = reactive(['/keyempty.png', '/key1.png', '/key2.png', '/keyfull.png']);
-
-const increment = () => {
-  emberNumber.value++;
-};
-
-const decrement = () => {
-  emberNumber.value--;
-};
-
-const keyIncrement = () => {
-  if (keyNumber.value == 3) {
-    keyNumber.value = 0;
-    return;
-  }
-  keyNumber.value++;
-};
-const keyDecrement = () => {
-  if (keyNumber.value == 0) {
-    keyNumber.value = 3;
-    return;
-  }
-  keyNumber.value--;
-};
-
-const forge = () => {
-  if (emberNumber.value < 6) {
-    return;
-  }
-  emberNumber.value = emberNumber.value - 6;
-  keyNumber.value++;
-};
-</script>
-
 <template>
-  <div class="h-screen w-screen box-content m-0 p-4 flex gap-2">
-    <!-- <div>
-      <img :src="key[keyNumber]" class="logo" alt="Vite logo" />
-      <div style="text-align: center">
-        <button @click="keyIncrement">+</button>
-        <button @click="keyDecrement">-</button>
-      </div>
-    </div>
-    <div class="ember">
-      <img src="/ember.png" class="emberImage" />
-      <div style="text-align: center">
-        <p>{{ emberNumber }}</p>
-        <button @click="increment">+</button>
-        <button @click="decrement">-</button>
-        <button @click="forge">forgia</button>
-      </div>
-    </div> -->
-    <PlayerCard></PlayerCard>
-    <PlayerCard></PlayerCard>
+  <div class="h-screen w-screen box-content m-0 flex flex-wrap overflow-hidden bg-slate-300">
+    <PlayerCard v-for="(player, playerIndex) in players" :key="playerIndex" :player="player" />
+    <EmptyPlayerCard v-if="players.length < 6" @click="addPlayer" />
+    <PlayerNameSelection v-if="showPlayerNameSelection" @create="createPlayer" />
   </div>
 </template>
+
+<script setup lang="ts">
+import { reactive, ref } from 'vue';
+import PlayerCard from './components/PlayerCard.vue';
+import EmptyPlayerCard from './components/EmptyPlayerCard.vue';
+import PlayerNameSelection from './components/PlayerNameSelection.vue';
+import { Player } from './types/Player';
+
+const players = reactive([] as Player[]);
+
+const showPlayerNameSelection = ref(false);
+const addPlayer = () => {
+  showPlayerNameSelection.value = true;
+};
+
+const createPlayer = (playerName: string) => {
+  players.push({
+    name: playerName,
+    embers: 0,
+    keys: 0,
+  });
+  showPlayerNameSelection.value = false;
+};
+</script>
 
 <style scoped></style>

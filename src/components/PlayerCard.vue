@@ -9,24 +9,40 @@
       <div class="flex items-center justify-between grow-0 h-1/4 px-3">
         <img :src="keyArray[keyIndex]" class="h-24" />
         <div class="flex gap-1">
-          <button class="w-16 h-9 bg-slate-600 rounded-md text-2xl" @click="decrementKey">-</button>
-          <button class="w-16 h-9 bg-slate-600 rounded-md text-2xl" @click="incrementKey">+</button>
+          <button
+            class="w-16 h-10 bg-slate-600 rounded-md text-2xl flex justify-center items-center"
+            @click="decrementKey"
+          >
+            <icon :icon="mdiMinus" />
+          </button>
+          <button
+            class="w-16 h-10 bg-slate-600 rounded-md text-2xl flex justify-center items-center"
+            @click="incrementKey"
+          >
+            <icon :icon="mdiPlus" />
+          </button>
         </div>
       </div>
       <div class="flex items-center justify-between grow-0 h-1/4 px-3">
         <img src="/ember.png" class="h-24" />
         <div class="flex gap-1 items-center">
-          <button class="w-16 h-9 bg-slate-600 rounded-md text-2xl" @click="decrementEmbers">
-            -
+          <button
+            class="w-16 h-10 bg-slate-600 rounded-md text-2xl flex justify-center items-center"
+            @click="decrementEmbers"
+          >
+            <icon :icon="mdiMinus" />
           </button>
           <div class="text-5xl w-20 text-center" style="font-family: 'Bungee Spice', sans-serif">
             {{ embers }}
           </div>
-          <button class="w-16 h-9 bg-slate-600 rounded-md text-2xl" @click="incrementEmbers">
-            +
+          <button
+            class="w-16 h-10 bg-slate-600 rounded-md text-2xl flex justify-center items-center"
+            @click="incrementEmbers"
+          >
+            <icon :icon="mdiPlus" />
           </button>
           <button
-            class="w-32 h-9 bg-slate-600 rounded-md text-2xl tracking-wider"
+            class="w-32 h-10 bg-slate-600 rounded-md text-2xl tracking-wider"
             @click="forgeKey"
           >
             FORGE
@@ -40,6 +56,8 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue';
 import { Player } from '../types/Player';
+import { mdiPlus, mdiMinus } from '@mdi/js';
+import Icon from './Icon.vue';
 
 const props = defineProps<{
   player: Player;

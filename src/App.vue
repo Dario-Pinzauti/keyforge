@@ -2,7 +2,11 @@
   <div class="h-screen w-screen box-content m-0 flex flex-wrap overflow-hidden bg-slate-300">
     <PlayerCard v-for="(player, playerIndex) in players" :key="playerIndex" :player="player" />
     <EmptyPlayerCard v-if="players.length < 6" @click="addPlayer" />
-    <PlayerNameSelection v-if="showPlayerNameSelection" @create="createPlayer" />
+    <PlayerNameSelection
+      v-if="showPlayerNameSelection"
+      @create="createPlayer"
+      @exit="showPlayerNameSelection = false"
+    />
   </div>
 </template>
 

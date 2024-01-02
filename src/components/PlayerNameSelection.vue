@@ -15,29 +15,31 @@
           autofocus
         />
       </div>
-      <button
+      <!-- <button
         class="grow-0 h-full bg-slate-800 hover:bg-slate-700 rounded-xl w-44 text-3xl text-white tracking-wider"
         @click="createPlayer"
       >
         CREA
-      </button>
+      </button> -->
+      <kf-button @click="createPlayer"> CREA </kf-button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from "vue";
+import KfButton from "./KfButton.vue";
 
-const emits = defineEmits(['create', 'exit']);
+const emits = defineEmits(["create", "exit"]);
 
-const playerName = ref('');
+const playerName = ref("");
 
 const createPlayer = () => {
-  emits('create', playerName.value);
+  emits("create", playerName.value);
 };
 
 const exit = () => {
-  emits('exit');
+  emits("exit");
 };
 </script>
 
